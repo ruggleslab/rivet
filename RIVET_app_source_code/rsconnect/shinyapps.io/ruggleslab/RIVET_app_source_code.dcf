@@ -1,0 +1,12 @@
+name: RIVET_app_source_code
+title: RIVET_app_source_code
+username:
+account: ruggleslab
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 250690
+bundleId: 1144854
+url: https://ruggleslab.shinyapps.io/RIVET_app_source_code/
+when: 1513792089.3897
+asMultiple: FALSE
+asStatic: FALSE
