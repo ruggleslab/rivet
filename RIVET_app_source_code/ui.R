@@ -1,3 +1,5 @@
+library('shinythemes')
+
 ui <- fluidPage(
   shinyUI(
     navbarPage(
