@@ -5,14 +5,14 @@ RIVET is a simple to use R-shiny based graphical user interface to automate the 
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 
 ### Prerequisites
 
 * R
 * shiny
 * limma
-* biobase
+* Biobase
 * ggplot2
 * edgeR
 * gplots
@@ -38,6 +38,7 @@ To install required packages, start R and enter:
 >source("https://bioconductor.org/biocLite.R")
 >biocLite('limma')
 >biocLite('edgeR')
+>biocLite('Biobase')
 ```
 
 To launch the RIVET app locally, execute the following in terminal (while not in R session) where ~/shinyapp should be replaced with the path to your application:
@@ -47,42 +48,13 @@ Rscript -e 'library(methods); shiny::runApp("~/shinyapp", launch.browser=TRUE)'
 
 ```
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
 ## Built With
 
 * [R shiny](https://shiny.rstudio.com) - The web framework used
 
+## Example Use and Citations
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+For example RIVET use cases and citations please refer to the Wiki.
 
 ## Authors
 
@@ -91,11 +63,12 @@ For the versions available, see the [tags on this repository](https://github.com
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project will be licensed soon.
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+* Hat tip to:
+    - Cooper for code advice
+    - Dr. Robert Schneider for scientific interpretation
+
 
