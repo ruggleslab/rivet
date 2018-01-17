@@ -6,12 +6,20 @@ library('gplots')
 library('Biobase')
 library(RColorBrewer)
 library(shinythemes)
-#library('base')
+library(shinyjs)
 
 # file size
 options(shiny.maxRequestSize=50*1024^2)
 
 server <- function(input , output, session){
+  
+  observeEvent(input$testme,{
+    if (input$testme) {
+      hide('user_input')
+    } else {
+      show('user_input')
+    }
+  })
   
   # input matrix
   expMatrix <- reactive({
@@ -23,11 +31,15 @@ server <- function(input , output, session){
       req(input$file1)
       inFile <- input$file1
       inputfile <- read.table(inFile$datapath, sep=input$sep, header=TRUE, row.names=1)
-    }
+     }
     exprs = as.matrix(inputfile)
     return(exprs)
   })
   
+  #test whether contrasts object is reset when reset button pushed
+  observeEvent(input$reset, {
+    reset("norm_tab")
+  })
   
   # update polysome input and label input if the test me data is chosen
   observeEvent(input$testme, {
@@ -75,13 +87,13 @@ server <- function(input , output, session){
   transcription <- c()
   makeReactiveBinding('transcription')
   observeEvent(input$testme,{
-  if (input$testme) {
-    ctrltx = c('R1_TamR_NS_T','R2_TamR_NS_T')
-    exptx = c('R1_TamR_4E_T', 'R2_TamR_4E_T')
-    transcription <<- reactive({list(ctrltx,exptx)})
-  } else {
-    transcription <<- callModule(sampleUpload, "tx", expMatrix)
-  }
+    if (input$testme) {
+      ctrltx = c('R1_TamR_NS_T','R2_TamR_NS_T')
+      exptx = c('R1_TamR_4E_T', 'R2_TamR_4E_T')
+      transcription <<- reactive({list(ctrltx,exptx)})
+    } else {
+      transcription <<- callModule(sampleUpload, "tx", expMatrix)
+    }
   })
   
   # input translation samples based on number of polysome fractions, output reordered matrix  
@@ -188,6 +200,12 @@ server <- function(input , output, session){
   MDSInput <- reactive({
     req(normalize())
     plotMDS(normalize(), cex=0.6)
+  })
+  
+  observeEvent(input$reset, {
+    output$MDSPlot <- renderPlot({
+      print(MDSInput())
+    })
   })
   
   # displays MDS plot
@@ -813,10 +831,5 @@ server <- function(input , output, session){
 
   # download bar plot
   callModule(DownloadPicGG, 'reg_bar', barInput)
-  
-  # trouble-shooting
-  output$final <- renderPrint({
-    unlist(translation())
-  })
 
 }

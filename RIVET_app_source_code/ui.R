@@ -1,7 +1,12 @@
-library('shinythemes')
+library(shinythemes)
+library(shinyjs)
 
 ui <- fluidPage(
   shinyUI(
+    tagList(
+      useShinyjs(),
+      div(
+        id = "norm_tab",
     navbarPage(
       'RIVET',
       theme = shinytheme("sandstone"),
@@ -69,14 +74,22 @@ ui <- fluidPage(
                             value = FALSE),
               
               # upload input file
-              fileInput('file1', 'Choose CSV File',
+              tagList(
+                div(id='user_input',
+                  fileInput('file1', 'Choose CSV File',
                         accept=c('text/csv', 
                                  'text/comma-separated-values,text/plain', 
-                                 '.csv')),
-              
-              radioButtons('sep', 'Separator',
+                                 '.csv')
+                  ),
+                  # file separator
+                  radioButtons('sep', 'Separator',
                            c(Tab='\t', Comma=','),
-                           '\t'),
+                           '\t')
+                )
+              ),
+              
+              #reset analysis button
+              actionButton("reset", "Reset form"),
               
               # platform choice
               radioButtons('platform', 'RNAseq or microarray',
@@ -103,6 +116,7 @@ ui <- fluidPage(
             mainPanel(
               textOutput("tutorialGroup"),
               tabsetPanel(
+                
                 # MDS plot
                 tabPanel("Plot", 
                          plotOutput("MDSPlot"),
@@ -129,7 +143,6 @@ ui <- fluidPage(
                   fluidRow(
                     h4("Transcription"),
                     uiOutput("txgroup")
-                    #sampleUploadUI('tx')
                   ),
                   hr(),
                   fluidRow(
@@ -137,9 +150,7 @@ ui <- fluidPage(
                     # place to hold dynamic inputs
                     uiOutput("inputGroup")
                   ),
-                  textOutput("group_warning"),
-                  # for trouble-shooting
-                  textOutput('final')
+                  textOutput("group_warning")
                 )
               )
             )
@@ -302,6 +313,8 @@ ui <- fluidPage(
             )
           )
         )
+      )
+    )
       )
     )
   )
