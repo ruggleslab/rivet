@@ -395,9 +395,9 @@ server <- function(input , output, session){
     param_tl()[[2]]
   })
   
-  # 'p-value' or 'adjusted p-value' translation
+  # 'p-value' or 'adjusted p-value' translation, bug fix********************
   option_tl <- reactive({
-    param_tx()[[3]]
+    param_tl()[[3]]
   })
   
   # results matrix for translation
@@ -465,19 +465,36 @@ server <- function(input , output, session){
   # number_of_inputs
   num_inputs <- reactive({input$numInputs})
 
-  # either volcano or heatmap depending on input number of polysome fractions
+  # bugfix for tl volcano plot *****************************************************************
+  # either volcano or heatmap depending on input number of polysome fractions, generates plot
   tlPlot <- reactive({
     req(num_inputs())
     if (num_inputs()>1){
       tl_plot <- callModule(heatmap, 'tl_heat', regulated_foldchange)
-      tl_dwnld <- callModule(heatmapDwnInput, 'tl_ht', regulated_foldchange)
-      callModule(DownloadPic, 'reg_tl', tl_dwnld)
     } else {
       tl_plot <- callModule(volcanoPlot, 'tl_vol', translation_results, fc_tl, pval_tl, option_tl)
-      tl_dwnld <- callModule(volcanoDwnInput, 'tl_ht', translation_results, fc_tl, pval_tl, option_tl)
-      callModule(DownloadPic, 'reg_tl', tl_dwnld)
     }
     return(tl_plot())
+  })
+  
+  #generates figure for download
+  observeEvent(input$numInputs,{
+    
+    output$reg_tl <- renderUI({
+      if (input$numInputs > 1){
+        DownloadPicUI('reg_tl_heatmap')
+      } else {
+        DownloadPicGGUI('reg_tl_volcano')
+      }
+    })
+    
+    if (input$numInputs > 1){
+      tl_dwnld_htmap <- callModule(heatmapDwnInput, 'tl_ht', regulated_foldchange)
+       callModule(DownloadPic, 'reg_tl_heatmap', tl_dwnld_htmap)
+    } else {
+      callModule(DownloadPicGG, 'reg_tl_volcano', tlPlot)
+    }
+    
   })
 
   # display translation plot
@@ -585,7 +602,7 @@ server <- function(input , output, session){
            int = limmatest_int())
   })
   
-  # slider bar for log2 ratio
+  # slider bar for log2 ratio, fixed bug option_te**********************************************
   param_te <- callModule(sliderInputFC, 'te_parameters')
   fc_te <- reactive({
     req(param_te())
@@ -596,7 +613,7 @@ server <- function(input , output, session){
     param_te()[[2]]
     })
   option_te <- reactive({
-    param_tx()[[3]]
+    param_te()[[3]]
   })
   
   # top te genes
@@ -638,18 +655,38 @@ server <- function(input , output, session){
     req(num_inputs())
     if (num_inputs()>1){
       te_plot <- callModule(heatmap, 'te_heat', regulated_foldchange_te)
-      te_dwnld <- callModule(heatmapDwnInput, 'te_ht', regulated_foldchange_te)
-      callModule(DownloadPic, 'reg_te', te_dwnld)
     } else {
       te_plot <- callModule(volcanoPlot, 'te_vol', limmaTEtest, fc_te, pval_te, option_te)
-      te_dwnld <- callModule(volcanoDwnInput, 'te_vol', limmaTEtest, fc_te, pval_te, option_te)
-      callModule(DownloadPic, 'reg_te', te_dwnld)
     }
     return(te_plot())
   })
   
+  #generates figure for download, te
+  observeEvent(input$numInputs,{
+    
+    output$reg_te <- renderUI({
+      if (input$numInputs > 1){
+        DownloadPicUI('reg_te_heatmap')
+      } else {
+        DownloadPicGGUI('reg_te_volcano')
+      }
+    })
+    
+    # bugfix regulated_foldchange_te*********************************************************************
+    if (input$numInputs > 1){
+      te_dwnld_htmap <- callModule(heatmapDwnInput, 'te_ht', regulated_foldchange_te)
+      callModule(DownloadPic, 'reg_te_heatmap', te_dwnld_htmap)
+    } else {
+      callModule(DownloadPicGG, 'reg_te_volcano', tePlot)
+    }
+    
+  })
+  
   output$tePlot <- renderPlot({print(tePlot())})
-  callModule(DownloadButton, 'te_reg', regulated)
+
+  #bugfix this is duplicated, commented out********************************************************************
+  #callModule(DownloadButton, 'te_reg', regulated)
+
 
 # translational regulation--------------------------------------------------------------------
 

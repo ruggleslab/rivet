@@ -5,8 +5,8 @@ account: ruggleslab
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 250690
-bundleId: 1144854
+bundleId: 1180348
 url: https://ruggleslab.shinyapps.io/RIVET_app_source_code/
-when: 1513792089.3897
+when: 1516219559.96769
 asMultiple: FALSE
 asStatic: FALSE

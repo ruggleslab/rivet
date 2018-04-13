@@ -220,7 +220,7 @@ ui <- fluidPage(
               ),
               div(class = "span8", 
                   plotOutput('translationPlot'),
-                  DownloadPicUI('reg_tl')
+                  uiOutput('reg_tl')
               )
             )
           )
@@ -258,7 +258,7 @@ ui <- fluidPage(
               ),
               div(class = "span8", 
                   plotOutput('tePlot'),
-                  DownloadPicUI('reg_te')
+                  uiOutput('reg_te')
               )
             )
           )
