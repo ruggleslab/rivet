@@ -28,8 +28,26 @@ ui <- fluidPage(
                 tabPanel("About",
                   h3('Resources'),
                   wellPanel(
-                    tags$ul(tags$li('Link to example file'), 
-                            tags$li('Citation for example data')
+                    'Example files:',
+                            tags$li(
+                              a('Geter et al.', href = 'https://github.com/ruggleslab/rivet/blob/master/example_files/Geter_et_al.txt', target = "_blank")
+                              ),
+                            tags$li(
+                              a('Hsieh et al.', href = 'https://github.com/ruggleslab/rivet/blob/master/example_files/Hseih_et_al.txt', target = '_blank')
+                              ),
+                            tags$li(
+                              a('Silvera et al.', href = 'https://github.com/ruggleslab/rivet/blob/master/example_files/Silvera_et_al.txt', target = '_blank')
+                            ),
+                    br(),
+                    'Citations for example files:',
+                            tags$li(
+                              'Geter et al. (2017).  Hyperactive mTOR and MNK1 phosphorylation of eIF4E confer tamoxifen resistance and estrogen independence through selective mRNA translation reprogramming. Genes Dev. 31:2235–49'
+                            ),
+                            tags$li(
+                              'Hsieh et al. (2012), The translational landscape of mTOR signalling steers cancer initiation and metastasis. Nature. 485:55–61'
+                            ),
+                            tags$li(
+                              'Silvera et al. (2017).  mTORC1 and -2 Coordinate Transcriptional and Translational Reprogramming in Resistance to DNA Damage and Replicative Stress in Breast Cancer Cells.  Mol Cell Biol. 37:e00577-16'
                             )
                   ),
                   h3('External Information'),
