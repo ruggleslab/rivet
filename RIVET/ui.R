@@ -41,13 +41,16 @@ ui <- fluidPage(
                     br(),
                     'Citations for example files:',
                             tags$li(
-                              'Geter et al. (2017).  Hyperactive mTOR and MNK1 phosphorylation of eIF4E confer tamoxifen resistance and estrogen independence through selective mRNA translation reprogramming. Genes Dev. 31:2235–49'
+                              'Geter et al. (2017).  Hyperactive mTOR and MNK1 phosphorylation of eIF4E confer tamoxifen resistance and estrogen independence through selective mRNA translation reprogramming. Genes Dev. 31:2235–49.',
+                              a('Geter et al. paper', href = 'http://genesdev.cshlp.org/content/31/22/2235.long', target='blank')
                             ),
                             tags$li(
-                              'Hsieh et al. (2012), The translational landscape of mTOR signalling steers cancer initiation and metastasis. Nature. 485:55–61'
+                              'Hsieh et al. (2012), The translational landscape of mTOR signalling steers cancer initiation and metastasis. Nature. 485:55–61.',
+                              a('Hsieh et al. paper', href = 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3663483/', target='blank')
                             ),
                             tags$li(
-                              'Silvera et al. (2017).  mTORC1 and -2 Coordinate Transcriptional and Translational Reprogramming in Resistance to DNA Damage and Replicative Stress in Breast Cancer Cells.  Mol Cell Biol. 37:e00577-16'
+                              'Silvera et al. (2017).  mTORC1 and -2 Coordinate Transcriptional and Translational Reprogramming in Resistance to DNA Damage and Replicative Stress in Breast Cancer Cells.  Mol Cell Biol. 37:e00577-16.',
+                              a('Silvera et al. paper', href = 'http://mcb.asm.org/content/37/5/e00577-16.long)', target='blank')
                             )
                   ),
                   h3('External Information'),
