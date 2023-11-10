@@ -18,6 +18,7 @@ These instructions will get you a copy of the project up and running on your loc
 * gplots
 * RColorBrewer
 * shinythemes
+* shinyjs
 
 
 ### Deployment
@@ -33,6 +34,7 @@ To install required packages, start R and enter:
 >install.packages('gplots')
 >install.packages('RColorBrewer')
 >install.packages('shinythemes')
+>install.packages('shinyjs')
 
 # for bioconductor packages
 >source("https://bioconductor.org/biocLite.R")
@@ -47,6 +49,8 @@ To launch the RIVET app locally, execute the following in terminal (while not in
 Rscript -e 'library(methods); shiny::runApp("~/shinyapp", launch.browser=TRUE)'
 
 ```
+
+Alternatively, you can open any of the rivet "*.R" files in an R IDE and select "Run App" from the top command bar. 
 
 ## Built With
 
